@@ -1,0 +1,209 @@
+@import 'base/utilities';
+@import 'base/flexbox';
+@import 'base/colors';
+
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Exo 2'), url(../fonts/exo2/Exo2-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Exo 2';
+  font-style: normal;
+  font-weight: 900;
+  src: local('Exo 2'), url(../fonts/exo2/Exo2-Bold.ttf) format('truetype');
+}
+
+//$background-color: #808080;
+//$ball-border-color: #f00;
+//
+//body {
+//  background: $background-color;
+//}
+//
+//.numbers {
+//  @include flexbox;
+//  @include flex-wrap(wrap);
+//
+//  .circle {
+//	@include border-radius(50%);
+//	@include flexbox;
+//	@include justify-content(center);
+//	@include align-items(center);
+//	@include flex-shrink(0);
+//
+//	border: 1px solid $ball-border-color;
+//	height: 50px;
+//	margin: 10px 10px 10px 0;
+//	width: 50px;
+//  }
+//}
+
+//--- General styles ---
+#pr-lucky6 {
+  border: 0;
+  font-family: 'Exo 2', Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  body {
+    border: 0;
+    font-family: 'Exo 2', Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    //overflow: hidden;
+
+    #bingo {
+      height: auto;
+      width: 100%;
+    }
+  }
+
+  #master_jackpot_won {
+    opacity: 0;
+  }
+
+  #fist-num-over text,
+  #fist-num-under text,
+  #sum5-over text,
+  #sum5-under text {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  //--- Colors ---
+
+  //Active element colors
+  .inactive-white {
+    fill: $white-color;
+  }
+
+  .active-green {
+    fill: $won-game-color;
+  }
+
+  //Odd/Even colors
+  .bar-default {
+    fill: $bars-empty-slot-color;
+  }
+
+  //vazi za par-nepar i najvise kuglica je u boji
+  .even {
+    fill: $even-bar-slot-color;
+  }
+
+  .odd {
+    fill: $white-color;
+  }
+
+  //Ball colors
+  .ball-visibility {
+    display: block;
+  }
+
+  #first-num-ball {
+    display: none;
+  }
+
+  #sum5 .sum5-value {
+    display: none;
+  }
+
+  #balls {
+    .ball {
+      display: none;
+    }
+  }
+
+  #bulbs {
+    visibility: hidden;
+  }
+
+  image {
+    overflow: visible;
+  }
+
+  .main-current-ball {
+    visibility: hidden;
+  }
+
+  #screen-main {
+    display: block;
+
+    img {
+      height: auto;
+      position: absolute;
+      width: 100%;
+    }
+
+    .lucky6-games-intro {
+      display: none;
+    }
+
+    .counter {
+      color: $white-color;
+      font-size: 64px;
+      font-weight: 900;
+      position: absolute;
+      right: 200px;
+      top: 100px;
+      z-index: 2;
+    }
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@mixin center() {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+}
+
+.counter {
+  .timer {
+    @include center;
+    height: 100px; /* change these to scale */
+    width: 100px;
+    //background-color: rgba(255,255,255, 0.1);
+    border-radius: 100%;
+  }
+
+  .circle {
+    stroke: #ffffff;
+    fill: transparent;
+    stroke-dasharray: 100 100;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s;
+    transition-timing-function: linear;
+  }
+
+  .text {
+    fill: rgba(255,255,255,0.7);
+    font-family: Helvetica, sans-serif;
+    font-size: 10px;
+    text-anchor: middle;
+  }
+}
