@@ -48,6 +48,14 @@ export default class DrawingDirective {
 
             this.numbers = this.drawData.numbers;
 
+            let clovers = this.drawData.clovers;
+            if (clovers) {
+                clovers.forEach((val) => {
+                    let cloverEl = angular.element(this.containerEl[0].querySelector(`#return-${val}`));
+                    cloverEl.css('visibility', 'visible');
+                });
+            }
+
             let drawingDelay = this.checkStartDrawingDelay();
             if (drawingDelay > 0) {
                 console.log('Delay je ', drawingDelay);
@@ -123,6 +131,7 @@ export default class DrawingDirective {
         this.showFirst5Balls(position, number);
         this.showEvenOddBar(number);
         this.showMostColors(colorName);
+        this.showJackpotsValue();
     }
 
     showCurrentBall(position, number, colorStyle) {
@@ -144,6 +153,12 @@ export default class DrawingDirective {
             firstBallEl.text(number);
             firstBallWrapEl.css('display', 'block');
             firstBallCircleEl.css('fill', `url(#${colorStyle})`);
+
+            if (number > 24.5) {
+                angular.element(this.containerEl[0].querySelector('#fist-num-over')).addClass('active-green');
+            } else {
+                angular.element(this.containerEl[0].querySelector('#fist-num-under')).addClass('active-green');
+            }
         }
     }
 
@@ -153,6 +168,14 @@ export default class DrawingDirective {
             let sumFirst5NumbersEl = angular.element(this.containerEl[0].querySelector('#sum5 .sum5-value'));
             sumFirst5NumbersEl.text(this.vm.sumFirst5Numbers);
             sumFirst5NumbersEl.css('display', 'block');
+        }
+
+        if (position >= 4) {
+            if (this.vm.sumFirst5Numbers > 122.5) {
+                angular.element(this.containerEl[0].querySelector('#sum5-over')).addClass('active-green');
+            } else {
+                angular.element(this.containerEl[0].querySelector('#sum5-under')).addClass('active-green');
+            }
         }
     }
 
@@ -301,6 +324,14 @@ export default class DrawingDirective {
             let char = this.drawData.daily_jackpot.code[k];
             el.text(char);
         }
+    }
+
+    showJackpotsValue() {
+        let dEl = angular.element(this.containerEl[0].querySelector('#dnevni_jackpot text'));
+        let mEl = angular.element(this.containerEl[0].querySelector('#master_jackpot text'));
+
+        dEl.text(this.drawData.daily_jackpot.value.toFixed(2));
+        mEl.text(this.drawData.jackpot.toFixed(2));
     }
 
     //stopDrawing() {

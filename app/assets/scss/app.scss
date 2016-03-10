@@ -47,13 +47,14 @@
   font-family: 'Exo 2', Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 
   body {
     border: 0;
     font-family: 'Exo 2', Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    //overflow: hidden;
+    overflow: hidden;
 
     #bingo {
       height: auto;
@@ -147,10 +148,15 @@
       font-size: 64px;
       font-weight: 900;
       position: absolute;
-      right: 200px;
-      top: 100px;
+      right: 350px;
+      top: 220px;
       z-index: 2;
     }
+  }
+
+  /* Return visibility */
+  #return {
+    visibility:hidden;
   }
 
 }
@@ -185,8 +191,8 @@
 .counter {
   .timer {
     @include center;
-    height: 100px; /* change these to scale */
-    width: 100px;
+    height: 250px; /* change these to scale */
+    width: 250px;
     //background-color: rgba(255,255,255, 0.1);
     border-radius: 100%;
   }

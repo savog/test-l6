@@ -32,13 +32,13 @@ export default class AdsDirective {
 
         let totalIntroTime = prCfg.countDownTime;
 
-        this.vm.countDownTime = prCfg.countDownTime;
+        this.countDownTime = prCfg.countDownTime;
         if (this.drawData && this.drawData.seconds_to_next_draw !== null) {
-            this.vm.countDownTime = this.drawData.seconds_to_next_draw;
+            this.countDownTime = this.drawData.seconds_to_next_draw;
         }
 
-        let endTime = this.vm.countDownTime;
-        let elapsedTime = totalIntroTime - endTime;
+        let remainingTime = this.countDownTime;
+        let elapsedTime = totalIntroTime - remainingTime;
 
         let timePerAd = totalIntroTime / 7;
         let currentAd = Math.ceil(elapsedTime / timePerAd);
@@ -53,26 +53,26 @@ export default class AdsDirective {
 
             changeAdsInterval = this._$interval(() => {
                 currentAd++;
-                console.log(angular.element(element[0].querySelectorAll('.lucky6-games-intro')));
+                //console.log(angular.element(element[0].querySelectorAll('.lucky6-games-intro')));
                 angular.element(element[0].querySelectorAll('.lucky6-games-intro')).css('display', 'none');
                 angular.element(element[0].querySelector(`.position-${currentAd}`)).css('display', 'block');
             }, timePerAd * 1000);
         }, timeToNextAd * 1000);
 
-        //console.log('count down time', this.countDownTime);
-        this.vm.countDownTime--; // Reduce by one second to show 00:00 time
+        console.log('count down time', this.countDownTime);
+        //this.countDownTime--; // Reduce by one second to show 00:00 time
 
-        let countDownInterval = this._$interval(() => {
-            if (this.vm.countDownTime > 0) {
-                this.vm.countDownTime--;
-            }
-        }, 1000);
+        //let countDownInterval = this._$interval(() => {
+        //    if (this.countDownTime > 0) {
+        //        this.countDownTime--;
+        //    }
+        //}, 1000);
 
         this._$timeout(() => {
-            if (angular.isDefined(countDownInterval)) {
-                this._$interval.cancel(countDownInterval);
-                countDownInterval = undefined;
-            }
+            //if (angular.isDefined(countDownInterval)) {
+            //    this._$interval.cancel(countDownInterval);
+            //    countDownInterval = undefined;
+            //}
 
             if (angular.isDefined(changeAdsInterval)) {
                 this._$interval.cancel(changeAdsInterval);
@@ -83,12 +83,15 @@ export default class AdsDirective {
             console.log('Intro total time', elapsed);
 
             this._$state.go('home');
-        }, endTime * 1000);
+        }, remainingTime * 1000);
 
+        this.animateCountDownCircle(remainingTime, totalIntroTime, element);
+    }
 
-        if (!Date.now)Date.now = function () {
-            return (new Date).getTime()
-        };
+    /*
+        This is snippet code from stack-overflow
+     */
+    animateCountDownCircle(remainingTime, totalIntroTime, element) {
         (function () {
             var n = ["webkit", "moz"];
             for (var e = 0; e < n.length && !window.requestAnimationFrame; ++e) {
@@ -109,28 +112,48 @@ export default class AdsDirective {
             }
         })();
 
-        var totalTime = this.vm.countDownTime,
-            currentTime = totalTime,
+        var totalTime = totalIntroTime,
+            currentTime = remainingTime,
             percentTime = null,
             timerId = null,
             timerText = angular.element(element[0].querySelector('.text')),
             timerCircle = angular.element(element[0].querySelector('.circle'));
 
-        timerId = function () {
-            if (currentTime === -1) {
+        timerId = () => {
+            if (currentTime < 0) {
                 return;
             }
-            timerText.text(currentTime);
+
+            if (currentTime > 0) {
+                //timerText.text(this.countDownTimer(currentTime));
+                currentTime -= 1;
+
+                timerText.text(this.countDownTimer(currentTime));
+
+            }
+
             percentTime = Math.round((currentTime / totalTime) * 100);
             timerCircle.css('strokeDashoffset', percentTime - 100);
 
-            setTimeout(function () {
-                timerText.text(currentTime);
-                currentTime -= 1;
+            setTimeout(() => {
+                //if (currentTime >= 0) {
+                //    timerText.text(this.countDownTimer(currentTime));
+                //}
+                //currentTime -= 1;
                 requestAnimationFrame(timerId);
             }, 1000);
         };
         timerId();
+    }
+
+    countDownTimer(time) {
+        let minutes = Math.floor(time / 60);
+        let seconds = time % 60;
+
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        return minutes + ':' + seconds;
     }
 
     static register(module) {
