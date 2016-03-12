@@ -27,7 +27,7 @@ export default class DrawingDirective {
         module.directive('prLucky6Drawing', DrawingDirective);
     }
 
-    link(scope, element, attr, ctrl) {
+    link(scope, element) {
         this.vm = scope.vm;
         this.drawData = this.vm.drawData;
 
@@ -280,25 +280,16 @@ export default class DrawingDirective {
         if (position > 24) {
             let alreadyTakenChars = 0;
             switch (position) {
-                case 27:
-                case 28:
-                    alreadyTakenChars = 1;
-                    break;
-                case 29:
-                case 30:
-                    alreadyTakenChars = 2;
-                    break;
-                case 31:
-                case 32:
-                    alreadyTakenChars = 3;
-                    break;
-                case 33:
-                case 34:
-                    alreadyTakenChars = 4;
-                    break;
+                case 27: case 28:
+                    alreadyTakenChars = 1; break;
+                case 29: case 30:
+                    alreadyTakenChars = 2; break;
+                case 31: case 32:
+                    alreadyTakenChars = 3; break;
+                case 33: case 34:
+                    alreadyTakenChars = 4; break;
                 case 35:
-                    alreadyTakenChars = 5;
-                    break;
+                    alreadyTakenChars = 5; break;
             }
             let dailyJackpotWrapEl = angular.element(this.containerEl[0].querySelector('#ticket-code'));
 

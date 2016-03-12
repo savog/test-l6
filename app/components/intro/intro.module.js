@@ -8,7 +8,7 @@ import 'angular-ui-router';
 import register from 'utils/register';
 import routes from './intro.routes';
 
-import AdsDirective from './ads/ads.directive';
+import AdsDirective from './count-down/count-down.directive';
 
 let m = angular.module('prIntro', [
     'ui.router'

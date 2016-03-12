@@ -49,7 +49,7 @@ export default function (module) {
                                 },
                                 previous_draw_jackpot: 5895.2,
                                 jackpot: 5895.25,
-                                seconds_to_next_draw: 11,
+                                seconds_to_next_draw: 55,
                                 clovers: [17, 26],
                                 status: 'ok',
                                 seconds_from_last_draw: 0,  // na 180 sec je kraj kola,od tada je ova vrednost je null.

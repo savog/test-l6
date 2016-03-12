@@ -16,53 +16,28 @@
   src: local('Exo 2'), url(../fonts/exo2/Exo2-Bold.ttf) format('truetype');
 }
 
-//$background-color: #808080;
-//$ball-border-color: #f00;
-//
-//body {
-//  background: $background-color;
-//}
-//
-//.numbers {
-//  @include flexbox;
-//  @include flex-wrap(wrap);
-//
-//  .circle {
-//	@include border-radius(50%);
-//	@include flexbox;
-//	@include justify-content(center);
-//	@include align-items(center);
-//	@include flex-shrink(0);
-//
-//	border: 1px solid $ball-border-color;
-//	height: 50px;
-//	margin: 10px 10px 10px 0;
-//	width: 50px;
-//  }
-//}
-
 //--- General styles ---
 #pr-lucky6 {
   border: 0;
   font-family: 'Exo 2', Arial, Helvetica, sans-serif;
   margin: 0;
-  padding: 0;
   overflow: hidden;
+  padding: 0;
 
   body {
     border: 0;
     font-family: 'Exo 2', Arial, Helvetica, sans-serif;
     margin: 0;
-    padding: 0;
     overflow: hidden;
+    padding: 0;
 
-    #bingo {
+    .bingo-drawing-container {
       height: auto;
       width: 100%;
     }
   }
 
-  #master_jackpot_won {
+  #master-jackpot-won {
     opacity: 0;
   }
 
@@ -145,20 +120,21 @@
 
     .counter {
       color: $white-color;
-      font-size: 64px;
+      font-size: 84px;
       font-weight: 900;
+      height: 200px;
       position: absolute;
-      right: 350px;
-      top: 220px;
+      right: 100px;
+      top: 100px;
+      width: 200px;
       z-index: 2;
     }
   }
 
-  /* Return visibility */
+  //Return visibility
   #return {
-    visibility:hidden;
+    visibility: hidden;
   }
-
 }
 
 
@@ -191,15 +167,15 @@
 .counter {
   .timer {
     @include center;
-    height: 250px; /* change these to scale */
+    border-radius: 100%;
+    height: 250px; // change these to scale
     width: 250px;
     //background-color: rgba(255,255,255, 0.1);
-    border-radius: 100%;
   }
 
   .circle {
-    stroke: #ffffff;
     fill: transparent;
+    stroke: $white-color;
     stroke-dasharray: 100 100;
     stroke-dashoffset: 0;
     transition: stroke-dashoffset 1s;
@@ -207,7 +183,7 @@
   }
 
   .text {
-    fill: rgba(255,255,255,0.7);
+    fill: $white-color;
     font-family: Helvetica, sans-serif;
     font-size: 10px;
     text-anchor: middle;
