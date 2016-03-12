@@ -6,6 +6,7 @@
   "scripts": {
     "test": "karma start karma.conf.js",
     "test-single-run": "karma start karma.conf.js --single-run",
+    "postinstall": "jspm install",
     "gulp": "gulp",
     "jspm": "jspm"
   },
