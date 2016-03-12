@@ -19,7 +19,7 @@ export default function (module) {
                     drawData: function ($http) {
                         'ngInject';
 
-                        return $http({method: 'POST', url: 'http://lucky6.premierbet.me/svc2/bingomaster/last_draw'});
+                        //return $http({method: 'POST', url: 'http://lucky6.premierbet.me/svc2/bingomaster/last_draw'});
 
                         // Mock data
                         let randomTime = Math.floor(Math.random() * (50 - 1 + 1)) + 1;

@@ -88,6 +88,7 @@ export default class DrawingDirective {
                 }
             }
 
+            this.showJackpotsValue();
             this.scheduleEndDrawing();
         }
     }
@@ -131,7 +132,6 @@ export default class DrawingDirective {
         this.showFirst5Balls(position, number);
         this.showEvenOddBar(number);
         this.showMostColors(colorName);
-        this.showJackpotsValue();
     }
 
     showCurrentBall(position, number, colorStyle) {
@@ -333,8 +333,8 @@ export default class DrawingDirective {
         let dEl = angular.element(this.containerEl[0].querySelector('#dnevni_jackpot text'));
         let mEl = angular.element(this.containerEl[0].querySelector('#master_jackpot text'));
 
-        dEl.text(this.drawData.daily_jackpot.value.toFixed(2));
-        mEl.text(this.drawData.jackpot.toFixed(2));
+        dEl.text(this.drawData.daily_jackpot.value.formatMoney(2, ',', '.'));
+        mEl.text(this.drawData.jackpot.formatMoney(2, ',', '.'));
     }
 
     //stopDrawing() {
