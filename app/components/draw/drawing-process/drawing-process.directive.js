@@ -237,6 +237,9 @@ export default class DrawingDirective {
         bulbs.attr('xlink:href', '/assets/images/bulbs.gif');
         bulbs.css('visibility', 'visible');
 
+        let num = this.numbers[position];
+        this.preLoadBallImage(num);
+
         this._$timeout(() => {
             bulbs.css('visibility', 'hidden');
             this.animateCurrentBallInDrum(position);
@@ -248,10 +251,19 @@ export default class DrawingDirective {
         let currentBallEl = angular.element(this.containerEl[0].querySelector('#draw'));
         currentBallEl.attr('xlink:href', `/assets/images/balls/${number}.gif`);
         currentBallEl.css('visibility', 'visible');
+        let nextNum = this.numbers[position + 1];
+        this.preLoadBallImage(nextNum);
 
         this._$timeout(() => {
             currentBallEl.css('visibility', 'hidden');
         }, this._prCfg.ballAnimationTime * 1000);
+    }
+
+    preLoadBallImage(number) {
+        if (number) {
+            let image = new Image();
+            image.src = `/assets/images/balls/${number}.gif`;
+        }
     }
 
     scheduleEndDrawing() {
