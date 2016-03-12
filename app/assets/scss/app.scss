@@ -18,23 +18,16 @@
 
 //--- General styles ---
 #pr-lucky6 {
+  background-color:#00162b;
   border: 0;
   font-family: 'Exo 2', Arial, Helvetica, sans-serif;
   margin: 0;
   overflow: hidden;
   padding: 0;
 
-  body {
-    border: 0;
-    font-family: 'Exo 2', Arial, Helvetica, sans-serif;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
-
-    .bingo-drawing-container {
-      height: auto;
-      width: 100%;
-    }
+  .bingo-drawing-container {
+    width:100%;
+    height:auto;
   }
 
   #master-jackpot-won {
