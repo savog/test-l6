@@ -42,6 +42,20 @@
     font-weight: 700;
   }
 
+  #fist-num-over path,
+  #fist-num-under path,
+  #sum5-over path,
+  #sum5-under path {
+    visibility: hidden;
+  }
+
+  #fist-num-over.active-green path,
+  #fist-num-under.active-green path,
+  #sum5-over.active-green path,
+  #sum5-under.active-green path {
+    visibility: visible;
+  }
+
   //--- Colors ---
 
   //Active element colors
