@@ -36,7 +36,7 @@ export default class DrawingDirective {
         } else {
             this.initialElapsedTime = this.drawData.seconds_from_last_draw;
 
-            console.log('elapsed time', this.initialElapsedTime);
+            //console.log('elapsed time', this.initialElapsedTime);
 
             this.containerEl = element;
             this.vm.numOfEvenNumbers = 0;
@@ -58,7 +58,7 @@ export default class DrawingDirective {
 
             let drawingDelay = this.checkStartDrawingDelay();
             if (drawingDelay > 0) {
-                console.log('Delay je ', drawingDelay);
+                //console.log('Delay je ', drawingDelay);
                 this._$timeout(() => {
                     //this.drawBall(0);
                     this.continuesDrawing(0);
@@ -276,7 +276,7 @@ export default class DrawingDirective {
             this.vm.goToIntoPage();
             this.cancelDailyJackpotInterval();
             let elapsed = new Date().getTime() - this.start;
-            console.log('total time', elapsed);
+            //console.log('total time', elapsed);
             //this.vm.goToHomePage();
         }, (this._prCfg.totalDrawingTime - this.initialElapsedTime) * 1000);
     }
