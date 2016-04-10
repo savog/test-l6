@@ -51,7 +51,7 @@ export default class DrawingDirective {
             let clovers = this.drawData.clovers;
             if (clovers) {
                 clovers.forEach((val) => {
-                    let cloverEl = angular.element(this.containerEl[0].querySelector(`#return-${val}`));
+                    let cloverEl = angular.element(this.containerEl[0].querySelector(`#clover-${val}`));
                     cloverEl.css('visibility', 'visible');
                 });
             }

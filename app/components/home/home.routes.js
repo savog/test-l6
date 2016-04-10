@@ -49,10 +49,10 @@ export default function (module) {
                                 },
                                 previous_draw_jackpot: 5895.2,
                                 jackpot: 5895.25,
-                                seconds_to_next_draw: 35,
-                                clovers: [17, 26],
+                                seconds_to_next_draw: null,
+                                clovers: [17, 27],
                                 status: 'ok',
-                                seconds_from_last_draw: 0,  // na 180 sec je kraj kola,od tada je ova vrednost je null.
+                                seconds_from_last_draw: 38,  // na 180 sec je kraj kola,od tada je ova vrednost je null.
                                 // Oko 120 sec prikazujes reklame i za to vreme je vrednost null jos uvek i
                                 // cekas da ponovo bude 0, sto znaci da je novo izvlacenje pocelo
                                 id: 117958,

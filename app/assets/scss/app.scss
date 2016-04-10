@@ -22,6 +22,22 @@
   cursor: none;
 }
 
+.screen-main {
+  overflow: hidden;
+}
+
+.intro-screen {
+  display: block;
+}
+
+.daily-jackpot-won {
+  display: none;
+}
+
+.master-jackpot-won {
+  display: none;
+}
+
 #pr-lucky6 {
   background-color:#00162b;
   border: 0;
@@ -149,7 +165,16 @@
 
   //Return visibility
   #return {
-    visibility: hidden;
+    g {
+      visibility: hidden;
+    }
+  }
+
+  //Clover visibility
+  #clover {
+    g {
+      visibility: hidden;
+    }
   }
 }
 
