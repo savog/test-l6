@@ -56,6 +56,12 @@ export default class DrawingDirective {
                 });
             }
 
+            let cashBackPosition = this.drawData['cashback_number'];
+            if (cashBackPosition) {
+                let cashBackEl = angular.element(this.containerEl[0].querySelector(`#return-${cashBackPosition}`));
+                cashBackEl.css('visibility', 'visible');
+            }
+
             let drawingDelay = this.checkStartDrawingDelay();
             if (drawingDelay > 0) {
                 //console.log('Delay je ', drawingDelay);

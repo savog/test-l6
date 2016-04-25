@@ -19,7 +19,11 @@ export default function (module) {
                     drawData: function ($http) {
                         'ngInject';
 
+                        // prod
                         return $http({method: 'POST', url: 'http://lucky6.premierbet.me/svc2/bingomaster/last_draw'});
+
+                        // staging
+                        //return $http({method: 'POST', url: 'http://stg.premierbet.me/svc2/bingomaster/last_draw'});
 
                         // Mock data
                         let randomTime = Math.floor(Math.random() * (50 - 1 + 1)) + 1;
@@ -29,7 +33,8 @@ export default function (module) {
                                     city: 'BAR',
                                     value: 152.2,
                                     code: '7KB5T',
-                                    issued: false,
+                                    issued: true,
+                                    draw_id: 117950,
                                     address: 'Cafe RELAX'
                                 },
                                 last_daily_jackpot: {
@@ -49,7 +54,7 @@ export default function (module) {
                                 },
                                 previous_draw_jackpot: 5895.2,
                                 jackpot: 5895.25,
-                                seconds_to_next_draw: null,
+                                seconds_to_next_draw: 50,
                                 clovers: [17, 27],
                                 status: 'ok',
                                 seconds_from_last_draw: 38,  // na 180 sec je kraj kola,od tada je ova vrednost je null.

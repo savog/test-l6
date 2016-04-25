@@ -27,6 +27,16 @@ export default class AdsDirective {
         this.vm = scope.vm;
         this.drawData = this.vm.drawData;
 
+        if (!this.drawData) {
+            return false;
+        }
+
+        let currentDrawId = this.drawData.id;
+        let dailyJackpot = this.drawData['daily_jackpot'];
+        if (dailyJackpot.issued === true && parseInt(dailyJackpot.draw_id) + 10 > currentDrawId) {
+            this.showDailyJackpotInfo(element[0], dailyJackpot);
+        }
+
         let start = new Date().getTime();
         let changeAdsInterval;
 
@@ -44,9 +54,9 @@ export default class AdsDirective {
         let currentAd = Math.ceil(elapsedTime / timePerAd) + 1;
         let timeToNextAd = currentAd * timePerAd - elapsedTime;
 
-        let adEl = angular.element(element[0].querySelector(`.lucky6-games-intro`));
+        let adEl = angular.element(element[0].querySelector('.lucky6-games-intro'));
         adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
-        adEl.css('display', `block`);
+        adEl.css('display', 'block');
         this.preLoadNextImage(currentAd + 1);
 
         this._$timeout(() => {
@@ -155,6 +165,23 @@ export default class AdsDirective {
     //    };
     //    timerId();
     //}
+
+    showDailyJackpotInfo(el, dailyJackpot) {
+        let isEl = angular.element(el.querySelector('.intro-banners '));
+        let djEl = angular.element(el.querySelector('.daily-jackpot-won'));
+
+        let locationEl = angular.element(el.querySelector('.daily-jackpot-location'));
+        locationEl.text(dailyJackpot.address + ', ' + dailyJackpot.city);
+        let valueEl = angular.element(el.querySelector('.daily-jackpot-value'));
+        valueEl.text(dailyJackpot.value + ' €');
+
+        for (let i = 0; i < 5; i++) {
+            angular.element(el.querySelector(`.daily-jackpot-code-pos-${i}`)).text(dailyJackpot.code[i]);
+        }
+
+        isEl.css('display', 'none');
+        djEl.css('display', 'block');
+    }
 
     countDownTimer(time) {
         let minutes = Math.floor(time / 60);
