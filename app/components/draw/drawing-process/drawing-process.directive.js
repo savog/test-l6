@@ -279,9 +279,10 @@ export default class DrawingDirective {
         }
 
         this._$timeout(() => {
-            this.vm.goToIntoPage();
             this.cancelDailyJackpotInterval();
-            let elapsed = new Date().getTime() - this.start;
+            this.vm.goToIntoPage(this.drawData);
+            //this._$state.go('home');
+            //let elapsed = new Date().getTime() - this.start;
             //console.log('total time', elapsed);
             //this.vm.goToHomePage();
         }, (this._prCfg.totalDrawingTime - this.initialElapsedTime) * 1000);

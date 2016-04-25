@@ -9,8 +9,8 @@ export default class DrawingController {
         this._$state = $state;
     }
 
-    goToIntoPage() {
-        this._$state.go('intro');
+    goToIntoPage(drawData) {
+        this._$state.go('intro', {drawData: drawData});
     }
 
     goToHomePage() {
