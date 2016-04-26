@@ -33,7 +33,7 @@ export default function (module) {
                                     city: 'BAR',
                                     value: 152.2,
                                     code: '7KB5T',
-                                    issued: true,
+                                    issued: false,
                                     draw_id: 117950,
                                     address: 'Cafe RELAX'
                                 },
@@ -54,7 +54,7 @@ export default function (module) {
                                 },
                                 previous_draw_jackpot: 5895.2,
                                 jackpot: 5895.25,
-                                seconds_to_next_draw: 50,
+                                seconds_to_next_draw: 6,
                                 clovers: [17, 27],
                                 status: 'ok',
                                 seconds_from_last_draw: 38,  // na 180 sec je kraj kola,od tada je ova vrednost je null.

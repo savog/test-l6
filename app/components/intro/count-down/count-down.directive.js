@@ -53,31 +53,38 @@ export default class AdsDirective {
 
         let remainingTime = this.countDownTime;
         let elapsedTime = totalIntroTime - remainingTime;
+        let numOfAds = 7;
 
-        let timePerAd = totalIntroTime / 7;
-        let currentAd = Math.ceil(elapsedTime / timePerAd) + 1;
-        let timeToNextAd = currentAd * timePerAd - elapsedTime;
+        let timePerAd = totalIntroTime / numOfAds;
+        let currentAd = Math.floor(elapsedTime / timePerAd) + 1;
 
-        let adEl = angular.element(element[0].querySelector('.lucky6-games-intro'));
-        adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
-        adEl.css('display', 'block');
-        this.preLoadNextImage(currentAd + 1);
+        if (currentAd <= numOfAds) {
+            let timeToNextAd = currentAd * timePerAd - elapsedTime;
 
-        this._$timeout(() => {
-            currentAd++;
-            //angular.element(element[0].querySelectorAll('.lucky6-games-intro')).css('display', 'none');
-            //angular.element(element[0].querySelector(`.position-${currentAd}`)).css('display', 'block');
+            let adEl = angular.element(element[0].querySelector('.lucky6-games-intro'));
             adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
+            adEl.css('display', 'block');
             this.preLoadNextImage(currentAd + 1);
 
-            changeAdsInterval = this._$interval(() => {
-                currentAd++;
-                //angular.element(element[0].querySelectorAll('.lucky6-games-intro')).css('display', 'none');
-                //angular.element(element[0].querySelector(`.position-${currentAd}`)).css('display', 'block');
-                adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
-                this.preLoadNextImage(currentAd + 1);
-            }, timePerAd * 1000);
-        }, timeToNextAd * 1000);
+            if (currentAd < numOfAds) {
+                this._$timeout(() => {
+                    currentAd++;
+                    adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
+                    this.preLoadNextImage(currentAd + 1);
+
+                    changeAdsInterval = this._$interval(() => {
+                        currentAd++;
+                        if (currentAd <= numOfAds) {
+                            adEl.attr('src', `assets/images/intro/bingo_intro_screen_${currentAd}.gif`);
+                        }
+                        if (currentAd < numOfAds) {
+                            this.preLoadNextImage(currentAd + 1);
+                        }
+                    }, timePerAd * 1000);
+
+                }, timeToNextAd * 1000);
+            }
+        }
 
         //console.log('count down time', this.countDownTime);
         this.countDownTime--; // Reduce by one second to show 00:00 time
@@ -109,9 +116,6 @@ export default class AdsDirective {
                 this._$interval.cancel(changeAdsInterval);
                 changeAdsInterval = undefined;
             }
-
-            let elapsed = new Date().getTime() - start;
-            //console.log('Intro total time', elapsed);
 
             this._$state.go('home');
         }, remainingTime * 1000);
