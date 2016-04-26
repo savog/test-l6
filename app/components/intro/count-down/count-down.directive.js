@@ -32,9 +32,13 @@ export default class AdsDirective {
         }
 
         let currentDrawId = this.drawData.id;
+        let lastDailyJackpot = this.drawData['last_daily_jackpot'];
         let dailyJackpot = this.drawData['daily_jackpot'];
-        if (dailyJackpot.issued === true && parseInt(dailyJackpot.draw_id) + 10 > currentDrawId) {
+
+        if (dailyJackpot.issued === true) {
             this.showDailyJackpotInfo(element[0], dailyJackpot);
+        } else if (parseInt(lastDailyJackpot.draw_id) + 10 > currentDrawId) {
+            this.showDailyJackpotInfo(element[0], lastDailyJackpot);
         }
 
         let start = new Date().getTime();
